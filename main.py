@@ -2,10 +2,13 @@ import scipy.constants
 import parse
 import calculations
 import pandas
+import vis_pandas
 
 objects = parse.parse_file("data.json")
 
 ITERATIONS = 100
+
+objs = []
 
 for iteration in range(ITERATIONS):
     for item in objects:
@@ -19,3 +22,6 @@ for iteration in range(ITERATIONS):
         acceleration = calculations.calculate_acceleration_from_force(total_force, item["mass"])
         item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration)
         item["position"] = calculations.calculate_new_position(item["position"], item["velocity"])
+
+        objs.append(item)
+vis_pandas.view_table(objs)
