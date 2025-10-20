@@ -1,14 +1,16 @@
 [
     {
-        "name" : "Sun",
+        "name" : "Earth",
         "mass": 5.972e24,
-        "position": [1, 0],
-        "velocity": [0, 29.78]
+        "position": [0, 0],
+        "velocity": [0, 0],
+        "color": [0, 0, 255]
     },
     {
-        "name" : "Earth",
-        "mass": 1.989e30,
-        "position": [0, 0],
-        "velocity": [0, 0]
+        "name" : "Moon",
+        "mass": 7.342e22,
+        "position": [384400000, 0],
+        "velocity": [0, 1022],
+        "color": [150, 150, 150]
     }
 ]
