@@ -1,4 +1,7 @@
 import scipy.constants
+import parse
+
+
 
 # F = ma
 
@@ -43,11 +46,13 @@ def calculate_new_position(initial_position, velocity):
 
 # Temporary test data
 
-obj1 = type('Obj', (object,), {'mass': 5.972e24, 'position': (0.0, 0.0), 'velocity': (0.0, 0.0)})  # Earth
-obj2 = type('Obj', (object,), {'mass': 7.348e22, 'position': (384400000.0, 0.0), 'velocity': (0.0, 1022)} )  # Moon
-obj3 = type('Obj', (object,), {'mass': 1000.0, 'position': (7000000.0, 0.0), 'velocity': (0.0, 7120)})  # Satellite
+# obj1 = type('Obj', (object,), {'mass': 5.972e24, 'position': (0.0, 0.0), 'velocity': (0.0, 0.0)})  # Earth
+# obj2 = type('Obj', (object,), {'mass': 7.348e22, 'position': (384400000.0, 0.0), 'velocity': (0.0, 1022)} )  # Moon
+# obj3 = type('Obj', (object,), {'mass': 1000.0, 'position': (7000000.0, 0.0), 'velocity': (0.0, 7120)})  # Satellite
 
-all_objects = [obj1, obj2, obj3]
+
+all_objects = parse.parse_file("data.json")
+
 iterations = 100
 for iteration in range(iterations):
     for item in all_objects:
