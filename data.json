@@ -1,0 +1,14 @@
+[
+    {
+        "name" : "Sun",
+        "mass": 5.972e24,
+        "position": [1, 0],
+        "velocity": [0, 29.78]
+    },
+    {
+        "name" : "Earth",
+        "mass": 1.989e30,
+        "position": [0, 0],
+        "velocity": [0, 0]
+    }
+]
