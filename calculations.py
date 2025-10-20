@@ -42,25 +42,3 @@ def calculate_new_position(initial_position, velocity):
     x = initial_position[0] + velocity[0]
     y = initial_position[1] + velocity[1]
     return (x, y)
-
-
-# Temporary test data
-
-all_objects = parse.parse_file("data.json")
-
-iterations = 100
-for iteration in range(iterations):
-    for item in all_objects:
-        forces = []
-        for other_item in filter(lambda x: x != item, all_objects):
-            force = calculate_gravitational_force(item, other_item)
-            forces.append(force)
-        total_force = calculate_sum_of_forces(forces)
-        print(f"Total gravitational force on object with mass {item["mass"]} kg: Fx = {total_force[0]} N, Fy = {total_force[1]} N")
-        acceleration = calculate_acceleration_from_force(total_force, item["mass"])
-        print(f"Resulting acceleration: ax = {acceleration[0]} m/s², ay = {acceleration[1]} m/s²\n")
-        item["velocity"] = calculate_velocity(item["velocity"], acceleration)
-        print(f"Updated velocity: vx = {item["velocity"][0]} m/s, vy = {item["velocity"][1]} m/s\n")
-        item["position"] = calculate_new_position(item["position"], item["velocity"])
-        print(f"Updated position: x = {item["position"][0]} m, y = {item["position"][1]} m\n")
-    
