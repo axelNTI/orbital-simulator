@@ -33,9 +33,9 @@ def calculate_acceleration_from_force(force, mass):
     ay = force[1] / mass
     return (ax, ay)
 
-def calculate_velocity(initial_velocity, acceleration):
-    vx = initial_velocity[0] + acceleration[0]
-    vy = initial_velocity[1] + acceleration[1]
+def calculate_velocity(initial_velocity, acceleration, time = 1):
+    vx = initial_velocity[0] + (acceleration[0] * time)
+    vy = initial_velocity[1] + (acceleration[1] * time)
     return (vx, vy)
 
 def calculate_new_position(initial_position, velocity):

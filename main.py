@@ -6,11 +6,12 @@ import vis_pandas
 
 objects = parse.parse_file("data.json")
 
-ITERATIONS = 20000
+ITERATIONS = 2629743 * 12
+TIME_STEP = 60
 
 objs = []
 
-for iteration in range(ITERATIONS):
+for iteration in range(ITERATIONS // TIME_STEP):
     for item in objects:
         forces = []
 
@@ -20,8 +21,8 @@ for iteration in range(ITERATIONS):
 
         total_force = calculations.calculate_sum_of_forces(forces)
         acceleration = calculations.calculate_acceleration_from_force(total_force, item["mass"])
-        item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration)
+        item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration, 1)
         item["position"] = calculations.calculate_new_position(item["position"], item["velocity"])
         objs.append(dict(item))
 
-vis_pandas.view_table(objs)
+vis_pandas.view_table(filter(lambda o: o["name"] == "Earth", objs))
