@@ -1,12 +1,12 @@
 import json
 
 type planet = dict[str, str | list[float]]
-data_dir = "."
+DATA_DIR = "."
 
 def parse_file(filename: str) -> list[planet] | bool:
-    global data_dir
+    global DATA_DIR
     try:
-        file = open(f"{data_dir}/{filename}")
+        file = open(f"{DATA_DIR}/{filename}")
         data = json.load(file)
         return data
     except OSError:
