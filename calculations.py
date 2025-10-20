@@ -10,14 +10,14 @@ import parse
 # Two dimensional plane
 def calculate_gravitational_force(obj1, obj2):
     G = scipy.constants.gravitational_constant
-    dx = obj2.position[0] - obj1.position[0]
-    dy = obj2.position[1] - obj1.position[1]
+    dx = obj2["position"][0] - obj1["position"][0]
+    dy = obj2["position"][1] - obj1["position"][1]
     r_squared = dx**2 + dy**2
     r = r_squared ** 0.5
     if r == 0:
         return (0.0, 0.0)  # Avoid division by zero; no force if at same position
-    
-    F = G * (obj1.mass * obj2.mass) / r_squared
+
+    F = G * (obj1["mass"] * obj2["mass"]) / r_squared
     Fx = F * dx / r
     Fy = F * dy / r
     
