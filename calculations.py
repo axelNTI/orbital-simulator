@@ -38,7 +38,7 @@ def calculate_velocity(initial_velocity, acceleration, time = 1):
     vy = initial_velocity[1] + (acceleration[1] * time)
     return (vx, vy)
 
-def calculate_new_position(initial_position, velocity):
-    x = initial_position[0] + velocity[0]
-    y = initial_position[1] + velocity[1]
+def calculate_new_position(initial_position, velocity, time = 1):
+    x = initial_position[0] + (velocity[0] * time)
+    y = initial_position[1] + (velocity[1] * time)
     return (x, y)
