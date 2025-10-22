@@ -7,8 +7,8 @@ import visualize
 
 objects = parse.parse_file("data.json")
 
-ITERATIONS = 2629743 * 12 * 5
-TIME_STEP = 15
+ITERATIONS = 2629743 * 6
+TIME_STEP = 10
 
 objs = []
 
