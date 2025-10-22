@@ -42,7 +42,7 @@ def visualize_simulation(simulation):
                 (obj["position"][1] - min_y) / (max_y - min_y) * window_size[1]
             )
             x, y = int(obj["position"][0]), int(obj["position"][1])
-            pygame.draw.circle(window, obj["color"], (obj["position"][0], obj["position"][1]), 30)
+            pygame.draw.circle(window, obj["color"], (obj["position"][0], obj["position"][1]), obj["radius"])
 
         manager.draw_ui(window)
         pygame.display.flip()
