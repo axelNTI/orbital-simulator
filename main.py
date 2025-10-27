@@ -32,7 +32,7 @@ interval = parse.vis_interval()
 
 visualize.init(window_size, initial_x_scale, initial_y_scale)
 
-for iteration in range(iterations // time_resolution):
+for iteration in range(int(iterations // time_resolution)):
     iterate(objects, time_resolution)
 
     # Display every 3600th iteration to speed up the visualization
