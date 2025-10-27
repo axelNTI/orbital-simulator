@@ -26,7 +26,9 @@ parser.add_argument("-f", "--file",
                     type = str
                     )
 args = parser.parse_args()
-parse.parse_file(args.file)
+if not parse.parse_file(args.file):
+    print(f"Couldn't open file {args.file}!")
+    exit()
 
 
 objects = parse.objects()
@@ -45,7 +47,6 @@ for iteration in range(MAX_ITERATIONS):
 
     label = f"Iteration {iteration} of {MAX_ITERATIONS}"
 
-    # Display every 3600th iteration to speed up the visualization
     if interval != 0:
         if iteration % interval == 0:
             visualize.visualize_step(objects, label)
