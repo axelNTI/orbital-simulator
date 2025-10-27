@@ -37,15 +37,17 @@ initial_y_scale = parse.initial_scale_y()
 window_size = parse.window_size()
 interval = parse.vis_interval()
 
-
 visualize.init(window_size, initial_x_scale, initial_y_scale)
 
-for iteration in range(int(iterations // time_resolution)):
+MAX_ITERATIONS = int(iterations) // time_resolution
+for iteration in range(MAX_ITERATIONS):
     iterate(objects, time_resolution)
+
+    label = f"Iteration {iteration} of {MAX_ITERATIONS}"
 
     # Display every 3600th iteration to speed up the visualization
     if interval != 0:
         if iteration % interval == 0:
-            visualize.visualize_step(objects)
+            visualize.visualize_step(objects, label)
     else:
-        visualize.visualize_step(objects)
+        visualize.visualize_step(objects, label)

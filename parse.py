@@ -18,12 +18,8 @@ def objects():
             relative_to = o["relative_position"]
             for other in data["objects"]:
                 if other["name"] == relative_to:
-                    print(f"old x for {o["name"]}: {o["position"][0]}")
-                    print(f"old y for {o["name"]}: {o["position"][1]}")
                     o["position"][0] += other["position"][0]
                     o["position"][1] += other["position"][1]
-                    print(f"new x for {o["name"]}: {o["position"][0]}")
-                    print(f"new y for {o["name"]}: {o["position"][1]}")
     return data["objects"]
 
 def iterations():
