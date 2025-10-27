@@ -1,9 +1,8 @@
-import pygame_gui
 import pygame
 import copy
 
 def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
-    global window, window_size, manager, clock, is_running, min_x, min_y, max_x, max_y
+    global window, window_size, clock, is_running, min_x, min_y, max_x, max_y
     pygame.init()
 
     # Set up the window
@@ -13,9 +12,6 @@ def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
     window = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Orbital Simulation Visualization")
 
-    # Set up the GUI manager
-    manager = pygame_gui.UIManager(window_size)
-
     clock = pygame.time.Clock()
     is_running = True
 
@@ -24,9 +20,6 @@ def visualize_step(step):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             is_running = False
-        manager.process_events(event)
-
-    manager.update(clock.tick(60) / 1000.0)
 
     window.fill((0, 0, 0))  # Clear the screen with black
 
@@ -49,7 +42,6 @@ def visualize_step(step):
         x, y = int(tmp_obj["position"][0]), int(tmp_obj["position"][1])
         pygame.draw.circle(window, tmp_obj["color"], (tmp_obj["position"][0], tmp_obj["position"][1]), tmp_obj["radius"])
 
-    manager.draw_ui(window)
     pygame.display.flip()
     # pygame.time.wait(1)  # Pause for a short duration to visualize the step
 
@@ -69,9 +61,6 @@ def visualize_simulation(simulation):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
-            manager.process_events(event)
-
-        manager.update(clock.tick(60) / 1000.0)
 
         window.fill((0, 0, 0))  # Clear the screen with black
 
@@ -85,6 +74,5 @@ def visualize_simulation(simulation):
             x, y = int(tmp_obj["position"][0]), int(tmp_obj["position"][1])
             pygame.draw.circle(window, tmp_obj["color"], (tmp_obj["position"][0], tmp_obj["position"][1]), tmp_obj["radius"])
 
-        manager.draw_ui(window)
         pygame.display.flip()
         # pygame.time.wait(1)  # Pause for a short duration to visualize the step
