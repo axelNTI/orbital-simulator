@@ -7,14 +7,7 @@ import visualize
 
 objects = parse.parse_file("data.json")
 
-ITERATIONS = 2629743 * 6
-TIME_STEP = 10
-
-objs = []
-
-simulations = []
-
-for iteration in range(ITERATIONS // TIME_STEP):
+def iterate(objects, step):
     for item in objects:
         forces = []
 
@@ -24,12 +17,25 @@ for iteration in range(ITERATIONS // TIME_STEP):
 
         total_force = calculations.calculate_sum_of_forces(forces)
         acceleration = calculations.calculate_acceleration_from_force(total_force, item["mass"])
-        item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration, TIME_STEP)
-        item["position"] = calculations.calculate_new_position(item["position"], item["velocity"], TIME_STEP)
-        objs.append(dict(item))
-    
-    simulations.append([dict(o) for o in objects])
+        item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration, step)
+        item["position"] = calculations.calculate_new_position(item["position"], item["velocity"], step)
 
-vis_pandas.view_table(filter(lambda o: o["name"] == "Earth", objs))
+ITERATIONS = 2629743 * 6
+TIME_STEP = 10
 
-visualize.visualize_simulation(simulations)
+WINDOW_SIZE = (800, 600)
+MAX_X = 390_000_000
+MIN_X = -370_000_000
+MAX_Y = 410_000_000
+MIN_Y = -360_000_000
+
+initial_x_scale = (MIN_X, MAX_X)
+initial_y_scale = (MIN_Y, MAX_Y)
+visualize.init(WINDOW_SIZE, initial_x_scale, initial_y_scale)
+
+for iteration in range(ITERATIONS):
+    iterate(objects, TIME_STEP)
+
+    # Display every 3600th iteration to speed up the visualization
+    if iteration % 3600 == 0: 
+        visualize.visualize_step(objects)
