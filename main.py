@@ -4,6 +4,7 @@ import calculations
 import pandas
 import vis_pandas
 import visualize
+import argparse
 
 def iterate(objects, step):
     for item in objects:
@@ -18,8 +19,15 @@ def iterate(objects, step):
         item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration, step)
         item["position"] = calculations.calculate_new_position(item["position"], item["velocity"], step)
 
+parser = argparse.ArgumentParser("orbital-simulator")
+parser.add_argument("-f", "--file", 
+                    help = "Specify a file path to open", 
+                    default = "data.json",
+                    type = str
+                    )
+args = parser.parse_args()
+parse.parse_file(args.file)
 
-parse.parse_file("data.json")
 
 objects = parse.objects()
 iterations = parse.iterations()
