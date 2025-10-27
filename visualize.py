@@ -1,20 +1,52 @@
-import pygame_gui
 import pygame
+import copy
 
-def visualize_simulation(simulation):
+def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
+    global window, window_size, clock, is_running, min_x, min_y, max_x, max_y
     pygame.init()
 
     # Set up the window
-    window_size = (800, 600)
+    window_size = size
+    (min_x, max_x) = initial_scale_x
+    (min_y, max_y) = initial_scale_y
     window = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Orbital Simulation Visualization")
-
-    # Set up the GUI manager
-    manager = pygame_gui.UIManager(window_size)
 
     clock = pygame.time.Clock()
     is_running = True
 
+def visualize_step(step):
+    global min_x, max_x, min_y, max_y
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            is_running = False
+
+    window.fill((0, 0, 0))  # Clear the screen with black
+
+    # Draw each object
+    for obj in step:
+        tmp_obj = copy.deepcopy(obj)
+
+        pos_x = tmp_obj["position"][0]
+        pos_y = tmp_obj["position"][1]
+        min_x = min(min_x, pos_x)
+        min_y = min(min_y, pos_y)
+        max_x = max(max_x, pos_x)
+        max_y = max(max_y, pos_y)
+        print(f"obj is at x: {pos_x}, y: {pos_y}. max: {max_x}, {max_y}; min: {min_x}, {min_y}")
+
+        tmp_obj["position"] = (
+            (tmp_obj["position"][0] - min_x) / (max_x - min_x) * window_size[0],
+            (tmp_obj["position"][1] - min_y) / (max_y - min_y) * window_size[1]
+        )
+        x, y = int(tmp_obj["position"][0]), int(tmp_obj["position"][1])
+        pygame.draw.circle(window, tmp_obj["color"], (tmp_obj["position"][0], tmp_obj["position"][1]), tmp_obj["radius"])
+
+    pygame.display.flip()
+    # pygame.time.wait(1)  # Pause for a short duration to visualize the step
+
+def visualize_simulation(simulation):
+    init()
     # Get max x and y for scaling
     max_x = max(obj["position"][0] for step in simulation for obj in step)
     max_y = max(obj["position"][1] for step in simulation for obj in step)
@@ -29,21 +61,18 @@ def visualize_simulation(simulation):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 is_running = False
-            manager.process_events(event)
-
-        manager.update(clock.tick(60) / 1000.0)
 
         window.fill((0, 0, 0))  # Clear the screen with black
 
         # Draw each object
         for obj in step:
-            obj["position"] = (
-                (obj["position"][0] - min_x) / (max_x - min_x) * window_size[0],
-                (obj["position"][1] - min_y) / (max_y - min_y) * window_size[1]
+            tmp_obj = copy.deepcopy(obj)
+            tmp_obj["position"] = (
+                (tmp_obj["position"][0] - min_x) / (max_x - min_x) * window_size[0],
+                (tmp_obj["position"][1] - min_y) / (max_y - min_y) * window_size[1]
             )
-            x, y = int(obj["position"][0]), int(obj["position"][1])
-            pygame.draw.circle(window, obj["color"], (obj["position"][0], obj["position"][1]), obj["radius"])
+            x, y = int(tmp_obj["position"][0]), int(tmp_obj["position"][1])
+            pygame.draw.circle(window, tmp_obj["color"], (tmp_obj["position"][0], tmp_obj["position"][1]), tmp_obj["radius"])
 
-        manager.draw_ui(window)
         pygame.display.flip()
         # pygame.time.wait(1)  # Pause for a short duration to visualize the step
