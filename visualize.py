@@ -33,7 +33,6 @@ def visualize_step(step):
         min_y = min(min_y, pos_y)
         max_x = max(max_x, pos_x)
         max_y = max(max_y, pos_y)
-        print(f"obj is at x: {pos_x}, y: {pos_y}. max: {max_x}, {max_y}; min: {min_x}, {min_y}")
 
         tmp_obj["position"] = (
             (tmp_obj["position"][0] - min_x) / (max_x - min_x) * window_size[0],
