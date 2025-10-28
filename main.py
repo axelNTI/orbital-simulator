@@ -43,7 +43,7 @@ interval = parse.vis_interval()
 
 visualize.init(window_size, initial_x_scale, initial_y_scale)
 
-MAX_ITERATIONS = int(iterations) // time_resolution
+MAX_ITERATIONS = int(iterations // time_resolution)
 for iteration in range(MAX_ITERATIONS):
     iterate(objects, time_resolution)
 
