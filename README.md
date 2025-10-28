@@ -19,5 +19,7 @@ The initial configuration of the celestial bodies can be edited in the `data.jso
 
 `-c` or `--concurrent` is used if you want to calculate the movement of the celestial bodies concurrently. Useful if a lot of celestial bodies are used.
 
+`-l` or `--labels` is used to show the name of the planets on the 
+
 ---
 > Developed by Felix Svensson and Axel Thornberg
