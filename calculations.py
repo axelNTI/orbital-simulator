@@ -1,11 +1,4 @@
 import scipy.constants
-import parse
-
-
-
-# F = ma
-
-# F = G * (m1*m2) / r^2
 
 # Two dimensional plane
 def calculate_gravitational_force(obj1, obj2):

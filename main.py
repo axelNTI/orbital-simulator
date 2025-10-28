@@ -1,8 +1,5 @@
-import scipy.constants
 import parse
 import calculations
-import pandas
-import vis_pandas
 import visualize
 import argparse
 import concurrent.futures
