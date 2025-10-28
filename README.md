@@ -3,7 +3,7 @@
 ## Requirements
 
 The following needs to be installed:
-    - [Python](https://www.python.org/downloads/)
+- [Python](https://www.python.org/downloads/)
 
 Run the following to install the necessary dependencies:
 
