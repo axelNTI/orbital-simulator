@@ -17,6 +17,8 @@ def iterate(objects, step):
         total_force = calculations.calculate_sum_of_forces(forces)
         acceleration = calculations.calculate_acceleration_from_force(total_force, item["mass"])
         item["velocity"] = calculations.calculate_velocity(item["velocity"], acceleration, step)
+    
+    for item in objects:
         item["position"] = calculations.calculate_new_position(item["position"], item["velocity"], step)
 
 parser = argparse.ArgumentParser("orbital-simulator")
