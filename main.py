@@ -36,7 +36,7 @@ parser.add_argument("-f", "--file",
 parser.add_argument("-c", "--concurrent", 
                     help = "Enable concurrent velocity calculations", 
                     default = False,
-                    type = bool
+                    action = "store_true"
                     )
     
 args = parser.parse_args()
