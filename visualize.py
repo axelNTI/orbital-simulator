@@ -18,7 +18,7 @@ def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
     clock = pygame.time.Clock()
     is_running = True
 
-def visualize_step(step, label = ""):
+def visualize_step(step, label, planetary_labels):
     global min_x, max_x, min_y, max_y
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -39,6 +39,8 @@ def visualize_step(step, label = ""):
         pos_y = (pos_y - min_y) / (max_y - min_y) * window_size[1]
 
         pygame.draw.circle(window, obj["color"], (pos_x, pos_y), obj["radius"])
+        if planetary_labels:
+            font.render_to(window, (pos_x + 10, pos_y + 10), obj["name"], (255, 255, 255))
 
     if label != "":
         font.render_to(window, (20, 20), label, (255, 255, 255))

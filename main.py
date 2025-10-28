@@ -38,6 +38,12 @@ parser.add_argument("-c", "--concurrent",
                     default = False,
                     action = "store_true"
                     )
+
+parser.add_argument("-l", "--labels", 
+                    help = "Enable planetary labels", 
+                    default = False,
+                    action = "store_true"
+                    )
     
 args = parser.parse_args()
 if not parse.parse_file(args.file):
@@ -63,6 +69,6 @@ for iteration in range(MAX_ITERATIONS):
 
     if interval != 0:
         if iteration % interval == 0:
-            visualize.visualize_step(objects, label)
+            visualize.visualize_step(objects, label, args.labels)
     else:
-        visualize.visualize_step(objects, label)
+        visualize.visualize_step(objects, label, args.labels)
