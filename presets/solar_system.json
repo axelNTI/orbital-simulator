@@ -1,7 +1,7 @@
 {
     "iterations": 6.31138519e9,
     "time_resolution": 1800,
-    "window_size": [1600, 1200],
+    "window_size": [1400, 900],
     "max_x": 390000000,
     "min_x": -370000000,
     "max_y": 410000000,
