@@ -3,7 +3,7 @@ import pygame.freetype
 
 FONT_SIZE = 24
 
-def init(size: tuple[int, int], initial_scale_x: tuple[int, int] = (-1, 1), initial_scale_y: tuple[int, int] = (-1, 1)):
+def init(size: tuple[int, int], initial_scale_x: tuple[int, int] = (-1, 1), initial_scale_y: tuple[int, int] = (-1, 1)) -> None:
     global window, window_size, clock, is_running, min_x, min_y, max_x, max_y, font
     pygame.init()
     font = pygame.freetype.Font(None, FONT_SIZE)
