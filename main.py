@@ -6,7 +6,7 @@ import concurrent.futures
 import graph
 
 def iterate(objects: list[dict, ...], step: float) -> None:
-    def velocity_update():
+    def velocity_update() -> None:
         for item in objects:
             forces = []
 
