@@ -88,4 +88,4 @@ for iteration in range(MAX_ITERATIONS):
         if not args.disable_visualization:
             visualize.visualize_step(objects, label, args.labels)
         if not args.disable_graph:
-            graph.graph_step(iteration, objects)
+            graph.graph_step(iteration, objects, interval)

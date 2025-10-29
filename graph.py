@@ -18,17 +18,21 @@ def init(objects):
     ax.set_title("Velocity per Object Over Time")
     ax.legend()
 
-def graph_step(iteration, objects):
+def graph_step(iteration, objects, interval):
     for i, obj in enumerate(objects):
         vx, vy = obj["velocity"]
         vel_mag = (vx**2 + vy**2)**0.5
         velocity_data[i].append(vel_mag)
 
-        # Update the line
-        lines[i].set_xdata(range(len(velocity_data[i])))
+        x_vals = range(len(velocity_data[i]))
+        lines[i].set_xdata(x_vals)
         lines[i].set_ydata(velocity_data[i])
 
     ax.relim()
     ax.autoscale_view()
+
+    ticks = ax.get_xticks()
+    ax.set_xticklabels([int(t * interval) for t in ticks])
+
     plt.draw()
     plt.pause(0.001)
