@@ -3,6 +3,7 @@ import calculations
 import visualize
 import argparse
 import concurrent.futures
+import graph
 
 def iterate(objects, step):
     def velocity_update():
@@ -44,6 +45,18 @@ parser.add_argument("-l", "--labels",
                     default = False,
                     action = "store_true"
                     )
+
+parser.add_argument("-dg", "--disable-graph", 
+                    help = "Disable the velocity graph",
+                    default = False,
+                    action = "store_true"
+                    )
+
+parser.add_argument("-dv", "--disable-visualization", 
+                    help = "Disable the visualization",
+                    default = False,
+                    action = "store_true"
+                    )
     
 args = parser.parse_args()
 if not parse.parse_file(args.file):
@@ -59,7 +72,11 @@ initial_y_scale = parse.initial_scale_y()
 window_size = parse.window_size()
 interval = parse.vis_interval()
 
-visualize.init(window_size, initial_x_scale, initial_y_scale)
+if not args.disable_visualization:
+    visualize.init(window_size, initial_x_scale, initial_y_scale)
+
+if not args.disable_graph:
+    graph.init(objects)
 
 MAX_ITERATIONS = int(iterations // time_resolution)
 for iteration in range(MAX_ITERATIONS):
@@ -67,8 +84,8 @@ for iteration in range(MAX_ITERATIONS):
 
     label = f"Iteration {iteration} of {MAX_ITERATIONS}"
 
-    if interval != 0:
-        if iteration % interval == 0:
+    if interval == 0 or iteration % interval == 0:
+        if not args.disable_visualization:
             visualize.visualize_step(objects, label, args.labels)
-    else:
-        visualize.visualize_step(objects, label, args.labels)
+        if not args.disable_graph:
+            graph.graph_step(iteration, objects)

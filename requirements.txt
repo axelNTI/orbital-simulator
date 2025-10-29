@@ -1,2 +1,4 @@
 pygame
 scipy
+pandas
+matplotlib
