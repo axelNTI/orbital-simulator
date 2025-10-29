@@ -3,7 +3,7 @@ import pygame.freetype
 
 FONT_SIZE = 24
 
-def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
+def init(size: tuple[int, int], initial_scale_x: tuple[float, float] = (-1, 1), initial_scale_y: tuple[float, float] = (-1, 1)):
     global window, window_size, clock, is_running, min_x, min_y, max_x, max_y, font
     pygame.init()
     font = pygame.freetype.Font(None, FONT_SIZE)
@@ -18,7 +18,7 @@ def init(size, initial_scale_x = (-1, 1), initial_scale_y = (-1, 1)):
     clock = pygame.time.Clock()
     is_running = True
 
-def visualize_step(step, label, planetary_labels):
+def visualize_step(step: list[dict, ...], label: str, planetary_labels: bool) -> None:
     global min_x, max_x, min_y, max_y
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
