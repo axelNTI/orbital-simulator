@@ -1,7 +1,7 @@
 import scipy.constants
 
 # Two dimensional plane
-def calculate_gravitational_force(obj1: dict, obj2: dict) -> tuple[float, float]:
+def calculate_gravitational_force(obj1: dict[str, int | float | list[int]], obj2: dict[str, int | float | list[int]]) -> tuple[float, float]:
     G = scipy.constants.gravitational_constant
     dx = obj2["position"][0] - obj1["position"][0]
     dy = obj2["position"][1] - obj1["position"][1]
@@ -16,7 +16,7 @@ def calculate_gravitational_force(obj1: dict, obj2: dict) -> tuple[float, float]
     
     return (Fx, Fy)
 
-def calculate_sum_of_forces(forces: list[tuple[float, float], ...]) -> tuple[float, float]:
+def calculate_sum_of_forces(forces: list[tuple[float, float]]) -> tuple[float, float]:
     total_fx = sum(force[0] for force in forces)
     total_fy = sum(force[1] for force in forces)
     return (total_fx, total_fy)

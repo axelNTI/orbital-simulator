@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import pandas as pd
 
-def init(objects: list[dict, ...]) -> None:
+def init(objects: list[dict[str, int | float | list[int]]]) -> None:
     global ax, lines, velocity_data
     fig, ax = plt.subplots()
     velocity_data = {i: [] for i in range(len(objects))}  # Store velocity history per object
@@ -19,7 +19,7 @@ def init(objects: list[dict, ...]) -> None:
     ax.set_title("Velocity per Object Over Time")
     ax.legend()
 
-def graph_step(objects: list[dict, ...], interval: int) -> None:
+def graph_step(objects: list[dict[str, int | float | list[int]]], interval: int) -> None:
     for i, obj in enumerate(objects):
         vx, vy = obj["velocity"]
         vel_mag = (vx**2 + vy**2)**0.5

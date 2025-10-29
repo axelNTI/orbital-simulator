@@ -3,7 +3,7 @@ import pygame.freetype
 
 FONT_SIZE = 24
 
-def init(size: tuple[int, int], initial_scale_x: tuple[float, float] = (-1, 1), initial_scale_y: tuple[float, float] = (-1, 1)):
+def init(size: tuple[int, int], initial_scale_x: tuple[int, int] = (-1, 1), initial_scale_y: tuple[int, int] = (-1, 1)):
     global window, window_size, clock, is_running, min_x, min_y, max_x, max_y, font
     pygame.init()
     font = pygame.freetype.Font(None, FONT_SIZE)
@@ -16,13 +16,9 @@ def init(size: tuple[int, int], initial_scale_x: tuple[float, float] = (-1, 1), 
     pygame.display.set_caption("Orbital Simulation Visualization")
 
     clock = pygame.time.Clock()
-    is_running = True
 
-def visualize_step(step: list[dict, ...], label: str, planetary_labels: bool) -> None:
+def visualize_step(step: list[dict[str, int | float | list[int]]], label: str, planetary_labels: bool) -> None:
     global min_x, max_x, min_y, max_y
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            is_running = False
 
     window.fill((0, 0, 0))  # Clear the screen with black
 
@@ -45,4 +41,7 @@ def visualize_step(step: list[dict, ...], label: str, planetary_labels: bool) ->
     if label != "":
         font.render_to(window, (20, 20), label, (255, 255, 255))
 
+
+    key_label_font = pygame.freetype.Font(None, 16)
+    key_label_font.render_to(window, (20, window.get_size()[1] - 30), "Space: Pause simulation -  Escape: Exit", (125, 125, 125))
     pygame.display.flip()
