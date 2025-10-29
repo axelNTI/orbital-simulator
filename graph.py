@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 import pandas as pd
 
 def init(objects):
@@ -31,8 +32,7 @@ def graph_step(objects, interval):
     ax.relim()
     ax.autoscale_view()
 
-    ticks = ax.get_xticks()
-    ax.set_xticklabels([int(t * interval) for t in ticks])
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda val, pos: f"{int(val * interval)}"))
 
     plt.draw()
     plt.pause(0.001)
