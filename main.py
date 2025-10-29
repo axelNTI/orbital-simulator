@@ -28,7 +28,7 @@ def iterate(objects: list[dict[str, int | float | list[int]]], step: float) -> N
     for item in objects:
         item["position"] = calculations.calculate_new_position(item["position"], item["velocity"], step)
 
-def pause_simulation():
+def pause_simulation() -> None:
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -37,7 +37,7 @@ def pause_simulation():
                 elif event.key ==  pygame.K_SPACE:
                     return
 
-def exit_with_parse_error(key: str, message: str):
+def exit_with_parse_error(key: str, message: str) -> None:
     print(f"Couldn't parse a value for '{key}': {message}")
     exit()
 

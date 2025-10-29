@@ -48,7 +48,7 @@ def window_size() -> tuple[int, int] | bool:
     except ValueError:
         return False
 
-def vis_interval():
+def vis_interval() -> int | bool:
     return _get_integer_by_key("visualization_interval", default = 1)
 
 def _get_initial_scale(axis: str) -> tuple[int, int] | bool:
