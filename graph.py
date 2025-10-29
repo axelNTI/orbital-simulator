@@ -18,7 +18,7 @@ def init(objects):
     ax.set_title("Velocity per Object Over Time")
     ax.legend()
 
-def graph_step(iteration, objects, interval):
+def graph_step(objects, interval):
     for i, obj in enumerate(objects):
         vx, vy = obj["velocity"]
         vel_mag = (vx**2 + vy**2)**0.5
